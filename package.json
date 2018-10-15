@@ -1,0 +1,11 @@
+{
+  "name": "litespeed",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server -p 3000"
+  },
+  "author": "Daniel Garden",
+  "license": "ISC"
+}

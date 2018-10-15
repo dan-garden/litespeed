@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Litespeed</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    <script src="litespeed.js"></script>
+    <style>
+        .dialog {
+            top: 5px;
+            /* height: 100%; */
+            /* border-radius: 15px; */
+            border: none;
+            /* border: solid 1px blue; */
+            width: 90%;
+            margin-bottom: 50px;
+            max-width: 300px;
+            border-radius: 5px;
+            box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            /* position:fixed; */
+            transition: all 0.3s ease-in;
+        }
+
+        .dialog::backdrop {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .dialog-header {
+            text-align: center;
+            /* background-color: orange; */
+            /* display: none; */
+            margin: 0;
+            font-size: 16px;
+            color: white;
+            padding: 15px 0;
+            /* border-radius: 5px; */
+            margin-bottom: 15px;
+            /* box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); */
+        }
+
+        .dialog-body {
+            width: 100%;
+            text-align: center;
+            /* box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); */
+        }
+
+        .dialog-body img {
+            max-width: 100%;
+            
+            /* box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); */
+        }
+
+        .dialog-close {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 30px;
+            height: 30px;
+            font-size: 16px;
+            color: white;
+            background-color: rgba(255, 0, 0, 1);
+            border-radius: 5px;
+            border: none;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+            cursor: pointer;
+            /* border-radius: 100%; */
+        }
+
+        .dialog-close:hover {
+            background-color:rgba(179, 0, 0, 1);
+        }
+
+        .dialog-close:focus {
+            outline: none;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        // let count = 0;
+        // let countdisplay = ls.create('h3', `${count}`);
+        // const button = ls.create('button', 'Click!', {
+        //     'bind:click': callback => {
+        //         count++;
+        //         countdisplay.innerText = count;
+        //     }
+        // });
+
+        // const dialog = ls.dialog('Count Up!', [countdisplay, button]);
+        
+        // app.append(dialog);
+        // dialog.show();
+
+        const dialog = ls.dialog(null, [
+            ls.create('img', null, {src: 'generated.png'})
+        ]);
+
+
+        const button = ls.create('button', 'Preview', {
+            'bind:click': e => dialog.show(1)
+        });
+
+        const expand = () => {
+            dialog.style.width = 'calc(100% - 50px)';
+            dialog.style.height = 'calc(100% - 100px)';
+            dialog.style.maxWidth = '100%';
+            // dialog.style.marginBottom = '0';
+        }
+
+        app.append(button);
+    </script>
+</body>
+
+</html>
