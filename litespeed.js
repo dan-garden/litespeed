@@ -342,6 +342,7 @@ class ls {
                 Object.keys(data[0]).filter(item => {
                     return displayed.indexOf(item) > -1
                 })
+                .sort((a, b) => displayed.indexOf(a) - displayed.indexOf(b))
                 .map(headItem => {
                     const order = sortable ? (currentSort.type == headItem ? currentSort.order : 'none') :
                         undefined;
@@ -358,7 +359,9 @@ class ls {
             data.map(bodyItem => {
                 return ls.create('tr', Object.keys(bodyItem).filter(item => {
                     return displayed.indexOf(item) > -1
-                }).map(bodyData => {
+                })
+                .sort((a, b) => displayed.indexOf(a) - displayed.indexOf(b))
+                .map(bodyData => {
                     let row;
                     if (bodyData === "date_created") {
                         let d = new Date(bodyItem[bodyData].date);
