@@ -306,12 +306,15 @@ class ls {
         return obj;
     }
 
-    static renderTable(root=false, data, displayed=[], sortable = false, currentSort) {
-        console.log(root, data);
+    static renderTable(root=false, data, displayed=false, sortable = false, currentSort) {
+        if(!displayed) {
+            display = Object.keys(data[0]);
+        }
+
         if (sortable) {
             if(!currentSort) {
                 currentSort = {
-                    type: 'username',
+                    type: display[0],
                     order: 'desc'
                 };
             }
@@ -374,17 +377,19 @@ class ls {
     }
 
     static mount(root, fn, params) {
-
+        let elem;
+        ls.clear(root);
         if(fn) {
-            let elem;
             if(params) {
                 params.unshift(root);
                 elem = fn.apply(null, params);
             } else {
                 elem = fn();
             }
-            root.append(elem);
+        } else {
+            elem = fn;
         }
+        root.append(elem);
     }
 
     static route(root, routes) {
