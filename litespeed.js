@@ -308,13 +308,13 @@ class ls {
 
     static renderTable(root=false, data, displayed=false, sortable = false, currentSort) {
         if(!displayed) {
-            display = Object.keys(data[0]);
+            displayed = Object.keys(data[0]);
         }
 
         if (sortable) {
             if(!currentSort) {
                 currentSort = {
-                    type: display[0],
+                    type: displayed[0],
                     order: 'desc'
                 };
             }
