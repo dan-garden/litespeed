@@ -380,10 +380,10 @@ class ls {
             if(params) {
                 params.unshift(root);
                 elem = fn.apply(null, params);
-
             } else {
                 elem = fn();
             }
+            root.append(elem);
         }
     }
 
