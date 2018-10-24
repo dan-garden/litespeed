@@ -307,7 +307,6 @@ class ls {
     }
 
     static renderTable(root=false, data, displayed=[], sortable = false, currentSort) {
-            
         if (sortable) {
             if(!currentSort) {
                 currentSort = {
@@ -315,19 +314,20 @@ class ls {
                     order: 'desc'
                 };
             }
-            const sortColumn = (e, type) => {
-                const target = e.target;
-                if (type === currentSort.type) {
-                    currentSort.order = currentSort.order == 'desc' ? 'asc' : 'desc';
-                } else {
-                    currentSort.type = type;
-                    currentSort.order = 'desc';
-                }
+        }
 
-                if(root && sortable) {
-                    ls.clear(root);
-                    root.append(ls.renderTable(root, users, displayed, sortable, currentSort));
-                }
+        const sortColumn = (e, type) => {
+            const target = e.target;
+            if (type === currentSort.type) {
+                currentSort.order = currentSort.order == 'desc' ? 'asc' : 'desc';
+            } else {
+                currentSort.type = type;
+                currentSort.order = 'desc';
+            }
+
+            if(root && sortable) {
+                ls.clear(root);
+                root.append(ls.renderTable(root, users, displayed, sortable, currentSort));
             }
         }
 
