@@ -306,7 +306,7 @@ class ls {
         return obj;
     }
 
-    static renderTable(root=false, data, displayed=false, sortable = false, currentSort) {
+    static table(root=false, data, displayed=false, sortable = false, currentSort) {
         if(!displayed) {
             displayed = Object.keys(data[0]);
         }
@@ -331,7 +331,7 @@ class ls {
 
             if(root && sortable) {
                 ls.clear(root);
-                root.append(ls.renderTable(root, users, displayed, sortable, currentSort));
+                root.append(ls.table(root, users, displayed, sortable, currentSort));
             }
         }
 
@@ -362,6 +362,7 @@ class ls {
                 })
                 .sort((a, b) => displayed.indexOf(a) - displayed.indexOf(b))
                 .map(bodyData => {
+                    console.log(bodyData);
                     let row;
                     if (bodyData === "date_created") {
                         let d = new Date(bodyItem[bodyData].date);
