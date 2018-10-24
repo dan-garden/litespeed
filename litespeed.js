@@ -320,8 +320,7 @@ class ls {
             }
         }
 
-        const sortColumn = (e, type) => {
-            const target = e.target;
+        const sortColumn = (type) => {
             if (type === currentSort.type) {
                 currentSort.order = currentSort.order == 'desc' ? 'asc' : 'desc';
             } else {
@@ -329,9 +328,18 @@ class ls {
                 currentSort.order = 'desc';
             }
 
+
+            const sortedData = data.sort((a, b) => {
+                // convert to strings and force lowercase
+                a[currentSort.type] = typeof a[currentSort.type] === 'string' ? a[currentSort.type].toLowerCase() : a[currentSort.type].toString();
+                b[currentSort.type] = typeof b[currentSort.type] === 'string' ? b[currentSort.type].toLowerCase() : b[currentSort.type].toString();
+            
+                return a.localeCompare(b);
+            });
+
             if(root && sortable) {
                 ls.clear(root);
-                root.append(ls.table(root, users, displayed, sortable, currentSort));
+                root.append(ls.table(root, sortedData, displayed, sortable, currentSort));
             }
         }
 
@@ -348,7 +356,7 @@ class ls {
                         undefined;
                     return ls.create('th', headItem, {
                         order,
-                        'bind:click': (e) => order ? sortColumn(e, headItem) : undefined
+                        'bind:click': (e) => order ? sortColumn(headItem) : undefined
                     })
                 })
             )
