@@ -329,13 +329,15 @@ class ls {
             }
 
 
-            const sortedData = data.sort((a, b) => {
+            let sortedData = data.sort((a, b) => {
                 // convert to strings and force lowercase
                 a = typeof a[currentSort.type] === 'string' ? a[currentSort.type].toLowerCase() : a[currentSort.type].toString();
                 b = typeof b[currentSort.type] === 'string' ? b[currentSort.type].toLowerCase() : b[currentSort.type].toString();
             
                 return a.localeCompare(b);
             });
+
+            
 
             if(currentSort.order == 'desc') {
                 sortedData = sortedData.reverse();
@@ -385,6 +387,7 @@ class ls {
                     return ls.create('td', row);
                 }))
             })
+
         );
 
         const table = ls.create('table', [head, body]);
