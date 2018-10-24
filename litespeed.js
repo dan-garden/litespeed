@@ -306,9 +306,93 @@ class ls {
         return obj;
     }
 
-    static mount(root, element) {
-        root.append(element);
-        return root;
+    static renderTable(root=false, data, displayed=[], sortable = false, currentSort) {
+            
+        if (sortable) {
+            if(!currentSort) {
+                currentSort = {
+                    type: 'username',
+                    order: 'desc'
+                };
+            }
+            const sortColumn = (e, type) => {
+                const target = e.target;
+                if (type === currentSort.type) {
+                    currentSort.order = currentSort.order == 'desc' ? 'asc' : 'desc';
+                } else {
+                    currentSort.type = type;
+                    currentSort.order = 'desc';
+                }
+
+                if(root && sortable) {
+                    ls.clear(root);
+                    root.append(ls.renderTable(root, users, displayed, sortable, currentSort));
+                }
+            }
+        }
+
+
+
+        const head = ls.create('thead',
+            ls.create('tr',
+                Object.keys(data[0]).filter(item => {
+                    return displayed.indexOf(item) > -1
+                })
+                .map(headItem => {
+                    const order = sortable ? (currentSort.type == headItem ? currentSort.order : 'none') :
+                        undefined;
+                    return ls.create('th', headItem, {
+                        order,
+                        'bind:click': (e) => order ? sortColumn(e, headItem) : undefined
+                    })
+                })
+            )
+        );
+
+
+        const body = ls.create('tbody',
+            data.map(bodyItem => {
+                return ls.create('tr', Object.keys(bodyItem).filter(item => {
+                    return displayed.indexOf(item) > -1
+                }).map(bodyData => {
+                    let row;
+                    if (bodyData === "date_created") {
+                        let d = new Date(bodyItem[bodyData].date);
+                        row = `${d.toLocaleDateString()} - ${d.toLocaleTimeString()}`;
+                    } else {
+                        row = bodyItem[bodyData];
+                    }
+
+                    return ls.create('td', row);
+                }))
+            })
+        );
+
+        const table = ls.create('table', [head, body]);
+        return table;
+    }
+
+
+    static table(data) {
+        
+    }
+
+    static tableSortable() {
+
+    }
+
+    static mount(root, fn, params) {
+        
+
+        if(fn) {
+            let el;
+            if(params) {
+                params.unshift(root);
+                elem = fn.call(params);
+            } else {
+                elem = fn();
+            }
+        }
     }
 
     static route(root, routes) {
