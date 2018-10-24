@@ -379,7 +379,7 @@ class ls {
             let elem;
             if(params) {
                 params.unshift(root);
-                elem = fn.call(params);
+                elem = fn.apply(null, params);
 
             } else {
                 elem = fn();
