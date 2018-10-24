@@ -307,6 +307,7 @@ class ls {
     }
 
     static renderTable(root=false, data, displayed=[], sortable = false, currentSort) {
+        console.log(root, data);
         if (sortable) {
             if(!currentSort) {
                 currentSort = {
@@ -373,15 +374,13 @@ class ls {
     }
 
     static mount(root, fn, params) {
-        console.log(root);
-        console.log(fn);
-        console.log(params);
 
         if(fn) {
-            let el;
+            let elem;
             if(params) {
                 params.unshift(root);
                 elem = fn.call(params);
+
             } else {
                 elem = fn();
             }
