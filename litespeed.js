@@ -372,17 +372,10 @@ class ls {
         return table;
     }
 
-
-    static table(data) {
-        
-    }
-
-    static tableSortable() {
-
-    }
-
     static mount(root, fn, params) {
-        
+        console.log(root);
+        console.log(fn);
+        console.log(params);
 
         if(fn) {
             let el;
