@@ -339,7 +339,7 @@ class ls {
 
             
 
-            if(currentSort.order == 'desc') {
+            if(currentSort.order == 'asc') {
                 sortedData = sortedData.reverse();
             }
 
