@@ -337,6 +337,10 @@ class ls {
                 return a.localeCompare(b);
             });
 
+            if(currentSort.order == 'desc') {
+                sortedData = sortedData.reverse();
+            }
+
             if(root && sortable) {
                 ls.clear(root);
                 root.append(ls.table(root, sortedData, displayed, sortable, currentSort));
@@ -370,7 +374,6 @@ class ls {
                 })
                 .sort((a, b) => displayed.indexOf(a) - displayed.indexOf(b))
                 .map(bodyData => {
-                    console.log(bodyData);
                     let row;
                     if (bodyData === "date_created") {
                         let d = new Date(bodyItem[bodyData].date);
