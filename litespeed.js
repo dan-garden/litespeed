@@ -331,8 +331,8 @@ class ls {
 
             const sortedData = data.sort((a, b) => {
                 // convert to strings and force lowercase
-                a[currentSort.type] = typeof a[currentSort.type] === 'string' ? a[currentSort.type].toLowerCase() : a[currentSort.type].toString();
-                b[currentSort.type] = typeof b[currentSort.type] === 'string' ? b[currentSort.type].toLowerCase() : b[currentSort.type].toString();
+                a = typeof a[currentSort.type] === 'string' ? a[currentSort.type].toLowerCase() : a[currentSort.type].toString();
+                b = typeof b[currentSort.type] === 'string' ? b[currentSort.type].toLowerCase() : b[currentSort.type].toString();
             
                 return a.localeCompare(b);
             });
